@@ -9,9 +9,22 @@
   const nano = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789', 8);
   const app = express();
   const server = http.createServer(app);
-  const io = new Server(server, { cors: { origin: '*' } });
+   const io = new Server(server, {
+  cors: {
+    origin: 'https://kollywood-grid-game.vercel.app',
+    methods: ['GET', 'POST'],
+    credentials: true
+  },
+  transports: ['websocket', 'polling'] // explicitly allow both
+});
 
-  app.use(cors());
+ app.use(cors({
+  origin: 'https://kollywood-grid-game.vercel.app', // your frontend URL
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+}));
+
   app.use(express.json());
 
   const MAX_ROUNDS = 5;
