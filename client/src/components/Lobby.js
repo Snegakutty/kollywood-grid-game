@@ -3,8 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { SERVER } from '../api';
 
-let socket;
-
+const socket = io("https://kollywood-backend.onrender.com");
 export default function Lobby() {
   const { gameId } = useParams();
   const [name, setName] = useState('');
